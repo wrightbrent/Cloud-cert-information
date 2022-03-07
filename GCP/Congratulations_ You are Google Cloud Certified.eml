@@ -1,0 +1,1415 @@
+Delivered-To: brent.wright1021@gmail.com
+Received: by 2002:a1f:b4cd:0:0:0:0:0 with SMTP id d196csp3974645vkf;
+        Fri, 11 Feb 2022 19:31:56 -0800 (PST)
+X-Received: by 2002:a05:6638:382a:: with SMTP id i42mr2573033jav.256.1644636716162;
+        Fri, 11 Feb 2022 19:31:56 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1644636716; cv=none;
+        d=google.com; s=arc-20160816;
+        b=pKlUWIXWZDRskleEgQzK4LqLY788dE4doGeUXyKWaWaHQHTiWEb3aUFNGBf7VNA2Fd
+         QIx/f570uu0uYGGsWUjI2B+CjB0kjf8xZaUP/Yj+I2GeIrfD6l86DeBeIkEMCaPTy7+D
+         tdHhI/nUaRfTQmefL2egY2vfP9Jdbuy2FORD5x5kpDI0AGENOYpCkZjhbAmFXYLBaLC2
+         FIydsrnNG36WfmNgutt3gM/gfXOdSllHeSa1XF05Gur9cpuHMkJQYz/E6EBgz3f1Fxs8
+         tI7k9VwtGyl90LvcYcABuwGHVvTFgv26WkMQ0hc8Z3sjwxqIv8WiTO2r66UWQjpYHFmz
+         Nn4A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:from:subject:message-id:reply-to:date:mime-version
+         :dkim-signature;
+        bh=yiWt3+gmp+fHF8wylGIfZ4811/QeONpeGKrP2w4oplc=;
+        b=nFku5QuJ6adZtzzs4FnoYKjoIOpp+ukUX8wTAnP6G6S1HccAgHD1q7NR4bvECtfRPu
+         762iPL1pDeBefQ60E8K4nRbgKmjIi7QJc0C8H1JB9PZadwyETDKM50q3p4WrqIQzyx6W
+         Pnj/7j8Yz+nY6/JDWlO9lg4M7Er+Ygn9jis2d2smAvna0WtxekpQDpxAirORtz+YmjXZ
+         K4H3AbrhKTs+zuycmP1wBtZ8r1QbLukzcqwUuhBF8q2VlwtdcLwsLJ79W1qO4R0GgOpw
+         AeNQEa+cGyvAThD6wn6TtlD74YdCODlvn1AJfPkIQNeBW6cSWFaBa1GVmbNpMJUhdQF5
+         0+ug==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=fVC4Kh3Q;
+       spf=pass (google.com: domain of 3kyohyhsmaliudgmv-ujwvwflasd-esfsywewfl1y1wwxvsxs.shhav.yggydwmkwjugflwfl.uge@m3kw2wvrgufz5godrsrytgd7.apphosting.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3KyoHYhsmALIUdgmV-UjWVWflaSd-eSfSYWeWfl1y1WWXVSxs.ShhaV.YggYdWmkWjUgflWfl.Uge@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+Return-Path: <3KyoHYhsmALIUdgmV-UjWVWflaSd-eSfSYWeWfl1y1WWXVSxs.ShhaV.YggYdWmkWjUgflWfl.Uge@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id d13sor3239080ilv.99.2022.02.11.19.31.55
+        for <brent.wright1021@gmail.com>
+        (Google Transport Security);
+        Fri, 11 Feb 2022 19:31:56 -0800 (PST)
+Received-SPF: pass (google.com: domain of 3kyohyhsmaliudgmv-ujwvwflasd-esfsywewfl1y1wwxvsxs.shhav.yggydwmkwjugflwfl.uge@m3kw2wvrgufz5godrsrytgd7.apphosting.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=fVC4Kh3Q;
+       spf=pass (google.com: domain of 3kyohyhsmaliudgmv-ujwvwflasd-esfsywewfl1y1wwxvsxs.shhav.yggydwmkwjugflwfl.uge@m3kw2wvrgufz5godrsrytgd7.apphosting.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3KyoHYhsmALIUdgmV-UjWVWflaSd-eSfSYWeWfl1y1WWXVSxs.ShhaV.YggYdWmkWjUgflWfl.Uge@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:date:reply-to:message-id:subject:from:to;
+        bh=yiWt3+gmp+fHF8wylGIfZ4811/QeONpeGKrP2w4oplc=;
+        b=fVC4Kh3Qc6slMFNgt+Gn6PUMWZQ5oGaF+F80SQ+2QMqNNh1RVV+Sb+AcYaLkseIv3j
+         BPTdQf/Db97psJyrD7VWjDoO8UAuv5YXIeKn7owrTBX4kupMNLml3zL4UDfIt7nTFEV8
+         2xuGSZ2krDnmkwcCBfIUjAFyMXAquFlqVnqxVfMscPlfMPQRo14gE7TkN14ymkB//+Ij
+         ueHlRngw047Q6THvHB9xRd+SWcoxl9IiwZBSt0TtdVKVzhyrySf9XC24jK6RjbCVKSOw
+         2dL0tK8LtCVJNCRVC6MKG8u0wL5fWlUPqC2CyMVVvzKJQfMhorHhyj+/UuIYfqnhgJOS
+         FJ6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:date:reply-to:message-id:subject
+         :from:to;
+        bh=yiWt3+gmp+fHF8wylGIfZ4811/QeONpeGKrP2w4oplc=;
+        b=K/qpVab+C/2x8fkNjKVH39FfMp+SwU0GTb0/U7P5kfBAKSHE2KjJs02z8fKeK/3HW8
+         GZZGskUZX3Y1BKZlJBHuP6SWZQ2vJZ3iBDHYvM+pCkpcYiGihIDiqHEec1mpZzUmBXz5
+         ToHkhkKzX7vxcW8PNqEKuz5s5tiV3XIPrmLycY8ZpEUxWJZtwgWjbAo7Qk55blkzMHkx
+         qW7k99pAs6WoeIyxxJHIX4P1xJfnoYi2FkIJK4T/a3k882KQjsfVR3+Qx98rpzd+Yjd7
+         XuYhNcDu7cZ6xXhlzOGHpZpakoaSdOeAL+gbbT+tBF4AnxNgqapma9i00HCHwum5Vprr
+         dvCg==
+X-Gm-Message-State: AOAM530a7qiGO55vgsXfj6p+1gbsqNZTlHEC1NwgH4QAIAlWT3rxQ44a
+	6gbJaHJvCoHPBmlOepadK9HurwqC4z602yCO1FHO0KW+2wD/
+X-Google-Smtp-Source: ABdhPJzmqQAKVOzxrUSfNQqQstYYKPjY/yBRyygQM8bGQwBg4S5aVRPouMb+KcDZbeacOoeDvG87nAwNCJyYQx4LmrLI8l5T54wF
+MIME-Version: 1.0
+X-Received: by 2002:a05:6e02:20ee:: with SMTP id q14mr2566699ilv.38.1644636715782;
+ Fri, 11 Feb 2022 19:31:55 -0800 (PST)
+Date: Fri, 11 Feb 2022 19:31:55 -0800
+Reply-To: noreply@google.com
+X-Google-Appengine-App-Id: s~google.com:cloud-credential-management
+Message-ID: <0000000000003a986905d7c9d3a6@google.com>
+Subject: Congratulations: You are Google Cloud Certified
+From: Google Cloud Certified Notices <google-cloud-certification-support@google.com>
+To: brent.wright1021@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000003a985105d7c9d3a3"
+
+--0000000000003a985105d7c9d3a3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html xmlns=3D"https://www.w3.org/1999/xhtml" xmlns:v=3D"urn:schemas-micros=
+oft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office">
+<head>
+  <!--[if gte mso 9]>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  <![endif]-->
+  <meta charset=3D"UTF-8" />
+  <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge" />
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0" />
+  <title>Congratulations: You are Google Cloud Certified</title>
+  <link href=3D"https://fonts.googleapis.com/css?family=3DGoogle+Sans:400,4=
+00i,500,500i,700,700i|Google+Sans+Display:400,400i,500,500i,700,700i&subset=
+=3Dlatin,latin-ext,vietnamese,greek,cyrillic" rel=3D"stylesheet" />
+  <link href=3D"https://fonts.googleapis.com/css?family=3DRoboto:100i,300,3=
+00i,400,400i,500,500i,700,700i,900,900i" rel=3D"stylesheet" />
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0" />
+
+  <!--[if mso]>
+    <style>
+    body,table tr,table td,a,p, span,table.MsoNormalTable {  font-family:Ar=
+ial, Helvetica, sans-serif !important;  }
+    </style>
+    <![endif]-->
+
+  <style>
+    /*=3D=3D=3D=3D=3D=3D=3D=3D=3D*/
+    /*reset styles*/
+
+    @font-face {
+      font-family: 'Helvetica';
+      src: url(fonts/Helvetica.eot);
+      src: url(fonts/Helvetica.eot) format('embedded-opentype'), url(fonts/=
+Helvetica.woff2) format('woff2'), url(fonts/Helvetica.woff) format('woff'),=
+ url(fonts/Helvetica.ttf) format('truetype'), url(fonts/Helvetica.svg%23hel=
+vetica) format('svg');
+    }
+
+    @font-face {
+      font-family: 'Helvetica Bold';
+      src: url(fonts/HelveticaBold.eot);
+      src: url(fonts/HelveticaBold.eot) format('embedded-opentype'), url(fo=
+nts/HelveticaBold.woff2) format('woff2'), url(fonts/HelveticaBold.woff) for=
+mat('woff'), url(fonts/HelveticaBold.ttf) format('truetype'), url(fonts/Hel=
+veticaBold.svg%23helveticabold) format('svg');
+    }
+
+    body {
+      background-color: #f0f0f1;
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      mso-margin-top-alt: 0;
+      mso-margin-bottom-alt: 0;
+      mso-padding-alt: 0;
+    }
+
+    div,
+    p,
+    a,
+    li,
+    td {
+      -webkit-text-size-adjust: none;
+    }
+
+    #outlook a {
+      padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    table {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+
+    table td {
+      border-collapse: collapse;
+    }
+
+    table h1,
+    table h2,
+    table h3,
+    table h4 {
+      margin-top: 0 !important;
+      margin-right: 0 !important;
+      margin-bottom: 0 !important;
+      margin-left: 0 !important;
+      padding-top: 0 !important;
+      padding-right: 0 !important;
+      padding-bottom: 0 !important;
+      padding-left: 0 !important;
+      display: inline-block !important;
+    }
+
+    preheader {
+      display: none;
+      font-size: 1px;
+      visibility: hidden;
+      opacity: 0;
+      color: transparent;
+      height: 0;
+      width: 0;
+    }
+    /* IOS blue links */
+
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-size: inherit !important;
+      font-family: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+    }
+
+    a {
+      outline: none;
+    }
+    /* IOS blue links */
+
+    td a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .undoreset a,
+    .undoreset a:hover {
+      text-decoration: none !important;
+    }
+
+    .yshortcuts a {
+      border-bottom: none !important;
+    }
+
+    .ios-footer a {
+      color: #aaa !important;
+      text-decoration: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a img {
+      border: none;
+    }
+
+    .image_fix {
+      display: block;
+    }
+
+    .ReadMsgBody {
+      width: 100%;
+    }
+
+    .ExternalClass {
+      width: 100%;
+    }
+
+    .ExternalClass,
+    .ExternalClass p,
+    .ExternalClass span,
+    .ExternalClass font,
+    .ExternalClass td,
+    .ExternalClass div {
+      line-height: 100%;
+    }
+
+    img {
+      -ms-interpolation-mode: bicubic;
+    }
+
+    p {
+      font-family: 'Roboto', Arial, 'sans-serif' !important;
+      font-size: 14px;
+}
+    /*reset styles*/
+    /*=3D=3D=3D=3D=3D=3D=3D=3D=3D*/
+
+    @media screen and (max-width: 600px) {
+      .container img {
+        max-width: 100% !important;
+        height: auto !important
+      }
+      .container {
+        width: 95% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .container .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .inner-container {
+        width: 88% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .mob-hide {
+        display: none !important;
+        height: 0 !important;
+        overflow: hidden !important
+      }
+      .mob-center td,
+      .mob-center {
+        text-align: center !important
+      }
+      .mob-center table {
+        margin: 0 auto !important;
+        float: none !important;
+      }
+      .mob-img-full {
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .mobHauto {
+        height: auto !important
+      }
+      .mobF24 p,
+      .mobF24 {
+        font-size: 24px !important;
+        line-height: 26px !important;
+      }
+      .mobH40 {
+        height: 40px !important;
+      }
+      .mobH55 {
+        height: 55px !important;
+      }
+      .mobH35 {
+        height: 35px !important;
+      }
+      .mobH25 {
+        height: 25px !important;
+      }
+      .text-left {
+        text-align: left !important
+      }
+      .mobTblB5 table {
+        margin-bottom: 5px !important;
+      }
+      .mobH30 {
+        height: 30px !important;
+      }
+      .logo img {
+        max-width: 250px !important;
+        width: 250px !important;
+      }
+    }
+  </style>
+</head>
+
+<body style=3D"margin: 0; padding: 0;" bgcolor=3D"#f0f0f1">
+  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" bgcolor=3D"#f0f=
+0f1" border=3D"0">
+    <tr>
+      <td valign=3D"top" align=3D"center">
+        <table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"600" class=3D"container" style=3D"text-align:left; width: 600px; max-wi=
+dth: 600px;" border=3D"0">
+          <tr>
+            <td height=3D"20" style=3D"height: 20px;" class=3D"h20">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" class=3D"logo">
+              <img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/80=
+8-GJW-314/images/google-cloud-certified.png" width=3D"306" height=3D"37" st=
+yle=3D"display: block; width: 306px; height: 37px; max-width: 306px; margin=
+: 0; padding: 0; line-height: 0" border=3D"0" />
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"20" style=3D"height: 20px;" class=3D"h20">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td valign=3D"top" bgcolor=3D"#fff" style=3D"background-color: =
+#fff" align=3D"center">
+              <table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" w=
+idth=3D"500" class=3D"inner-container" style=3D"text-align:left; width: 500=
+px; max-width: 500px;" border=3D"0">
+                <tr>
+                  <td height=3D"45" style=3D"height: 45px;" class=3D"mobH40=
+">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class=3D"mobF24" valign=3D"top" style=3D"font-family:=
+'Google Sans', Arial, 'sans-serif'; font-size: 32px; line-height: 36px; col=
+or: #3c4043">
+                    <p style=3D"margin: 0; padding: 0; font-size: 32px; lin=
+e-height: 36px;"><strong>Associate Cloud Engineer Exam</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td height=3D"40" style=3D"height: 40px; border-bottom: 1=
+px solid #e8eaed" class=3D"mobH40">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height=3D"38" style=3D"height: 38px; border: none;">&=
+nbsp;</td>
+                </tr>
+                <tr>
+                  <td valign=3D"top" style=3D"font-family:'Roboto', Arial, =
+'sans-serif'; font-size: 14px; line-height: 23px; color: #3c4043;">
+                    <p style=3D"margin-top: 0; padding-top: 0;">
+                      <strong>Dear Brent,</strong>
+                    </p>
+                    <p>Congratulations! You are officially a Google Cloud C=
+ertified - Associate Cloud Engineer.</p>
+                    <p>Your certification information:</p>
+
+                    <ul>
+                      <li>Certified User: Brent Wright</li>
+                      <li>Candidate ID: c74f3cbc-4fd7-45bd-9729-f195dc94d8c=
+e</li>
+                      <li>Certification ID: 1K568R</li>
+                      <li>Series ID: 50798</li>
+                      <li>Effective Date: 11-Feb 2022</li>
+                      <li>Expiration Date: 11-Feb 2024</li>
+                    </ul>
+
+                    <!-- button begin -->
+                    <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0"=
+ width=3D"100%">
+                      <tr>
+                        <td height=3D"15" style=3D"height: 15px;">&nbsp;</t=
+d>
+                      </tr>
+                      <tr>
+                        <td valign=3D"top">
+                          <table cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" width=3D"185" bgcolor=3D"#1d428a" style=3D"width: 185px; max-width: =
+185px; background: #1a73e8; -webkit-border-radius: 5px; -moz-border-radius:=
+ 5px; border-radius: 5px; overflow: hidden; margin-left:auto; margin-right:=
+auto; text-align:center;">
+                            <tr>
+                              <td width=3D"10">&nbsp;</td>
+                              <td valign=3D"middle" style=3D"font-family:He=
+lvetica, Arial, 'sans-serif'; font-size: 14px; color: #61717d; height: 40px=
+; text-align: center; " align=3D"center" height=3D"40">
+                                <p style=3D"margin: 0; padding: 0; font-siz=
+e: 14px;"><span style=3D"text-decoration: none; color: #fff;"><a href=3D"ht=
+tps://www.credential.net/ea97a16a-1f43-4060-aade-dba9e629bc30?key=3Db17259f=
+d59a72523ef611bfe3644ed80e2fb0d9b9fc254696d16d5f2ad77b1da" style=3D"text-de=
+coration: none; color: #fff;" target=3D"_blank">Claim your certificate</a><=
+/span></p>
+                              </td>
+                              <td width=3D"10">&nbsp;</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height=3D"25" style=3D"height: 25px;">&nbsp;</t=
+d>
+                      </tr>
+                    </table>
+                    <!-- button End -->
+
+                    <p style=3D"margin-top: 10px; padding-top: 0;">
+                     We have created <a href=3D"https://www.credential.net/=
+ea97a16a-1f43-4060-aade-dba9e629bc30?key=3Db17259fd59a72523ef611bfe3644ed80=
+e2fb0d9b9fc254696d16d5f2ad77b1da">a digital certificate</a> available in an=
+ online format so you can easily retrieve and share the details of your ach=
+ievement.
+                     You can print or download your certificate, add it to =
+your LinkedIn profile, or share to any of your preferred social networks. I=
+n addition, you can opt-into having your
+                     digital certificate shown in the <a href=3D"https://go=
+oglecloudcertified.credential.net/">Google Cloud Certified directory</a>. T=
+his is the only verified, publicly available
+                     list of Google Cloud Certified individuals maintained =
+by our team.
+                    </p>
+
+                   =20
+                    <p>
+                      If you have questions, please visit our <a href=3D"ht=
+tps://cloud.google.com/certification/faqs/#0">Help Center</a>.
+                      Don't see an answer to your question or have other co=
+mments, concerns?
+                      You can reach us  <a href=3D"https://support.google.c=
+om/a/contact/certification">here</a>.
+                    </p>
+                    <p>Thank you for participating in our certification pro=
+gram! We're happy to have you in our community.</p>
+                    <p style=3D"margin-bottom: 0; padding-bottom: 0;">
+                      See you in the cloud,
+                      <br />The Google Cloud Certification Team
+                    </p>
+
+                  </td>
+                </tr>
+
+                <tr>
+                  <td height=3D"50" style=3D"height: 50px; border-bottom: 1=
+px solid #e8eaed" class=3D"mobH55">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height=3D"38" style=3D"height: 38px; border: none;" c=
+lass=3D"mobH35">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class=3D"text-left" valign=3D"top" align=3D"center" s=
+tyle=3D"font-family:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-he=
+ight: 23px; color: #3c4043; text-align: center">
+                    <p style=3D"margin: 0; padding: 0; font-size: 14px; lin=
+e-height: 23px;"><strong style=3D"font-weight: 500">For more information ch=
+eck out the links below</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td height=3D"30" style=3D"height: 30px;" class=3D"mobH25=
+">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td valign=3D"top" align=3D"center">
+                    <table cellpadding=3D"0" cellspacing=3D"0" width=3D"500=
+" border=3D"0" align=3D"center" class=3D"container" style=3D"text-align:lef=
+t; width: 500px; max-width: 500px;">
+                      <tr>
+                        <td valign=3D"top" class=3D"mobTblB5">
+                          <table align=3D"left" cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"210" style=3D"width: 210px; max-width: 210px=
+;" class=3D"container">
+                            <tr>
+                              <td valign=3D"top" align=3D"left">
+                                <table align=3D"left" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" width=3D"100%" style=3D"width: 100%; max-width:=
+ 100%;">
+                                  <tr>
+                                    <td valign=3D"middle" align=3D"left" wi=
+dth=3D"26">
+                                      <img alt=3D"" src=3D"https://lp.cloud=
+platformonline.com/rs/808-GJW-314/images/search-icon.png" width=3D"15" heig=
+ht=3D"15" style=3D"display: block; line-height: 0; width: 15px; max-width: =
+15px;">
+                                    </td>
+                                    <td valign=3D"top" style=3D"font-family=
+:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-height: 23px; color: =
+#1a73e8">
+                                      <p style=3D"margin: 0; padding: 0; fo=
+nt-size: 14px; line-height: 23px;"><strong style=3D"font-weight: 500; color=
+: #1a73e8; text-decoration: none;"><a href=3D"https://googlecloudcertified.=
+credential.net/" style=3D"color: #1a73e8; text-decoration: none;" target=3D=
+"_blank">Certified Directory</a></strong></p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                             </td>
+                             <td valign=3D"top">
+                          <![endif]-->
+                          <table align=3D"left" cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"125" style=3D"width: 125px; max-width: 125px=
+;" class=3D"container">
+                            <tr>
+                              <td valign=3D"top" align=3D"left">
+                                <table align=3D"left" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" width=3D"100%" style=3D"width: 100%; max-width:=
+ 100%;">
+                                  <tr>
+                                    <td valign=3D"middle" align=3D"left" wi=
+dth=3D"26">
+                                      <img alt=3D"" src=3D"https://lp.cloud=
+platformonline.com/rs/808-GJW-314/images/message-icon.png" width=3D"16" hei=
+ght=3D"16" style=3D"display: block; line-height: 0; width: 15px; max-width:=
+ 15px;">
+                                    </td>
+                                    <td valign=3D"top" style=3D"font-family=
+:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-height: 23px; color: =
+#1a73e8">
+                                      <p style=3D"margin: 0; padding: 0; fo=
+nt-size: 14px; line-height: 23px;"><strong style=3D"font-weight: 500; color=
+: #1a73e8; text-decoration: none;"><a href=3D"https://cloud.google.com/cert=
+ification/faqs/#0" target=3D"_blank" style=3D"color: #1a73e8; text-decorati=
+on: none;">Help Center</a></strong></p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            <td valign=3D"top">
+                          <![endif]-->
+                          <table align=3D"left" cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"165" style=3D"width: 165px; max-width:165px;=
+" class=3D"container">
+                            <tr>
+                              <td valign=3D"top" align=3D"left">
+                                <table align=3D"left" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" width=3D"100%" style=3D"width: 100%; max-width:=
+ 100%;">
+                                  <tr>
+                                    <td valign=3D"middle" align=3D"left" wi=
+dth=3D"26">
+                                      <img alt=3D"" src=3D"https://lp.cloud=
+platformonline.com/rs/808-GJW-314/images/mail-icon.png" width=3D"15" height=
+=3D"15" style=3D"display: block; line-height: 0; width: 15px; max-width: 15=
+px;">
+                                    </td>
+                                    <td valign=3D"top" style=3D"font-family=
+:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-height: 23px; color: =
+#1a73e8">
+                                      <p style=3D"margin: 0; padding: 0; fo=
+nt-size: 14px; line-height: 23px;"><strong style=3D"font-weight: 500; color=
+: #1a73e8; text-decoration: none;"><a href=3D"https://support.google.com/a/=
+contact/certification" style=3D"color: #1a73e8; text-decoration: none;" tar=
+get=3D"_blank">Contact Us</a></strong></p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td height=3D"60" style=3D"height: 60px;" class=3D"mobH25=
+">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td valign=3D"top" bgcolor=3D"#f0f0f1" style=3D"background-color: #f0=
+f0f1" align=3D"center">
+        <table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"500" class=3D"inner-container" style=3D"text-align:left; width: 500px; =
+max-width: 500px;" border=3D"0">
+          <tr>
+            <td height=3D"45" style=3D"height: 45px;" class=3D"mobH30">&nbs=
+p;</td>
+          </tr>
+          <tr>
+            <td align=3D"left">
+              <img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/80=
+8-GJW-314/images/google-cloud.png" width=3D"145" height=3D"26" style=3D"dis=
+play: block; width:145px; height:26px; max-width:145px; margin: 0; padding:=
+ 0; line-height: 0" />
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"18" style=3D"height: 18px;" class=3D"h18">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" style=3D"font-family:'Roboto'=
+, Arial, 'sans-serif'; font-size: 11px; line-height: 15px; color: #9aa0a6; =
+text-align: left; padding-bottom: 15px;">
+              <p style=3D"margin: 0; padding: 0; font-size: 11px; line-heig=
+ht: 15px;">Google LLC 1600 Amphitheatre Parkway, Mountain View, CA 94043</p=
+>
+            </td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" style=3D"font-family:'Roboto'=
+, Arial, 'sans-serif'; font-size: 11px; line-height: 15px; color: #9aa0a6; =
+text-align: left; padding-bottom: 15px;">
+              <p style=3D"margin: 0; padding: 0; font-size: 11px; line-heig=
+ht: 15px;">Your personal information is handled in accordance with <span st=
+yle=3D"color: #1A73E8; text-decoration: underline;"><a href=3D"https://poli=
+cies.google.com/privacy" target=3D"_blank" style=3D"color: #1a73e8; text-de=
+coration: underline;">Google's Privacy Policy</a></span>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" style=3D"font-family:'Roboto'=
+, Arial, 'sans-serif'; font-size: 11px; line-height: 15px; color: #9aa0a6; =
+text-align: left; padding-bottom: 15px;">
+              <p style=3D"margin: 0; padding: 0; font-size: 11px; line-heig=
+ht: 15px;">Google reserves the right to revoke your Google Cloud Certificat=
+ion if you violate the <span style=3D"color: #1A73E8; text-decoration: unde=
+rline;"><a href=3D"https://cloud.google.com/certification/terms" target=3D"=
+_blank" style=3D"color: #1a73e8; text-decoration: underline;">Exam Terms an=
+d Conditions</a></span>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"30" style=3D"height: 30px;" class=3D"h30">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td valign=3D"top" align=3D"left">
+              <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=
+=3D"95" align=3D"left" style=3D"width: 95px; max-width: 95px;">
+                <tr>
+                  <td align=3D"center">
+                    <a href=3D"https://twitter.com/Gcpcloud" target=3D"_bla=
+nk"><img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/808-GJW-314/=
+images/twiter.png" width=3D"20" height=3D"20" style=3D"display: block; widt=
+h:20px; height:20px; max-width:20px; margin: 0 auto; padding: 0; line-heigh=
+t: 0" /></a>
+                  </td>
+                  <td width=3D"46">&nbsp;</td>
+                  <td align=3D"center">
+                    <a href=3D"https://www.facebook.com/googlecloud/" targe=
+t=3D"_blank"><img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/808=
+-GJW-314/images/fb.png" width=3D"20" height=3D"20" style=3D"display: block;=
+ width:20px; height:20px; max-width:20px; margin: 0 auto; padding: 0; line-=
+height: 0" /></a>
+                  </td>
+                  <td width=3D"46">&nbsp;</td>
+                  <td align=3D"center">
+                    <a href=3D"https://www.linkedin.com/company/google-clou=
+d-platform-certified/about/" target=3D"_blank"><img alt=3D"" src=3D"https:/=
+/lp.cloudplatformonline.com/rs/808-GJW-314/images/linkedin.png" width=3D"20=
+" height=3D"20" style=3D"display: block; width:20px; height:20px; max-width=
+:20px; margin: 0 auto; padding: 0; line-height: 0" /></a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"60" style=3D"height: 60px;" class=3D"mobH40">&nbs=
+p;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- end of 100% -->
+</body>
+</html>
+--0000000000003a985105d7c9d3a3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html xmlns=3D"https://www.w3.org/1999/xhtml" xmlns:v=3D"urn:schemas-micros=
+oft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office">
+<head>
+  <!--[if gte mso 9]>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  <![endif]-->
+  <meta charset=3D"UTF-8" />
+  <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge" />
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0" />
+  <title>Congratulations: You are Google Cloud Certified</title>
+  <link href=3D"https://fonts.googleapis.com/css?family=3DGoogle+Sans:400,4=
+00i,500,500i,700,700i|Google+Sans+Display:400,400i,500,500i,700,700i&subset=
+=3Dlatin,latin-ext,vietnamese,greek,cyrillic" rel=3D"stylesheet" />
+  <link href=3D"https://fonts.googleapis.com/css?family=3DRoboto:100i,300,3=
+00i,400,400i,500,500i,700,700i,900,900i" rel=3D"stylesheet" />
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0" />
+
+  <!--[if mso]>
+    <style>
+    body,table tr,table td,a,p, span,table.MsoNormalTable {  font-family:Ar=
+ial, Helvetica, sans-serif !important;  }
+    </style>
+    <![endif]-->
+
+  <style>
+    /*=3D=3D=3D=3D=3D=3D=3D=3D=3D*/
+    /*reset styles*/
+
+    @font-face {
+      font-family: 'Helvetica';
+      src: url(fonts/Helvetica.eot);
+      src: url(fonts/Helvetica.eot) format('embedded-opentype'), url(fonts/=
+Helvetica.woff2) format('woff2'), url(fonts/Helvetica.woff) format('woff'),=
+ url(fonts/Helvetica.ttf) format('truetype'), url(fonts/Helvetica.svg%23hel=
+vetica) format('svg');
+    }
+
+    @font-face {
+      font-family: 'Helvetica Bold';
+      src: url(fonts/HelveticaBold.eot);
+      src: url(fonts/HelveticaBold.eot) format('embedded-opentype'), url(fo=
+nts/HelveticaBold.woff2) format('woff2'), url(fonts/HelveticaBold.woff) for=
+mat('woff'), url(fonts/HelveticaBold.ttf) format('truetype'), url(fonts/Hel=
+veticaBold.svg%23helveticabold) format('svg');
+    }
+
+    body {
+      background-color: #f0f0f1;
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      mso-margin-top-alt: 0;
+      mso-margin-bottom-alt: 0;
+      mso-padding-alt: 0;
+    }
+
+    div,
+    p,
+    a,
+    li,
+    td {
+      -webkit-text-size-adjust: none;
+    }
+
+    #outlook a {
+      padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    table {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+
+    table td {
+      border-collapse: collapse;
+    }
+
+    table h1,
+    table h2,
+    table h3,
+    table h4 {
+      margin-top: 0 !important;
+      margin-right: 0 !important;
+      margin-bottom: 0 !important;
+      margin-left: 0 !important;
+      padding-top: 0 !important;
+      padding-right: 0 !important;
+      padding-bottom: 0 !important;
+      padding-left: 0 !important;
+      display: inline-block !important;
+    }
+
+    preheader {
+      display: none;
+      font-size: 1px;
+      visibility: hidden;
+      opacity: 0;
+      color: transparent;
+      height: 0;
+      width: 0;
+    }
+    /* IOS blue links */
+
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-size: inherit !important;
+      font-family: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+    }
+
+    a {
+      outline: none;
+    }
+    /* IOS blue links */
+
+    td a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .undoreset a,
+    .undoreset a:hover {
+      text-decoration: none !important;
+    }
+
+    .yshortcuts a {
+      border-bottom: none !important;
+    }
+
+    .ios-footer a {
+      color: #aaa !important;
+      text-decoration: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a img {
+      border: none;
+    }
+
+    .image_fix {
+      display: block;
+    }
+
+    .ReadMsgBody {
+      width: 100%;
+    }
+
+    .ExternalClass {
+      width: 100%;
+    }
+
+    .ExternalClass,
+    .ExternalClass p,
+    .ExternalClass span,
+    .ExternalClass font,
+    .ExternalClass td,
+    .ExternalClass div {
+      line-height: 100%;
+    }
+
+    img {
+      -ms-interpolation-mode: bicubic;
+    }
+
+    p {
+      font-family: 'Roboto', Arial, 'sans-serif' !important;
+      font-size: 14px;
+}
+    /*reset styles*/
+    /*=3D=3D=3D=3D=3D=3D=3D=3D=3D*/
+
+    @media screen and (max-width: 600px) {
+      .container img {
+        max-width: 100% !important;
+        height: auto !important
+      }
+      .container {
+        width: 95% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .container .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .inner-container {
+        width: 88% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .mob-hide {
+        display: none !important;
+        height: 0 !important;
+        overflow: hidden !important
+      }
+      .mob-center td,
+      .mob-center {
+        text-align: center !important
+      }
+      .mob-center table {
+        margin: 0 auto !important;
+        float: none !important;
+      }
+      .mob-img-full {
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin: 0 auto !important;
+      }
+      .mobHauto {
+        height: auto !important
+      }
+      .mobF24 p,
+      .mobF24 {
+        font-size: 24px !important;
+        line-height: 26px !important;
+      }
+      .mobH40 {
+        height: 40px !important;
+      }
+      .mobH55 {
+        height: 55px !important;
+      }
+      .mobH35 {
+        height: 35px !important;
+      }
+      .mobH25 {
+        height: 25px !important;
+      }
+      .text-left {
+        text-align: left !important
+      }
+      .mobTblB5 table {
+        margin-bottom: 5px !important;
+      }
+      .mobH30 {
+        height: 30px !important;
+      }
+      .logo img {
+        max-width: 250px !important;
+        width: 250px !important;
+      }
+    }
+  </style>
+</head>
+
+<body style=3D"margin: 0; padding: 0;" bgcolor=3D"#f0f0f1">
+  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" bgcolor=3D"#f0f=
+0f1" border=3D"0">
+    <tr>
+      <td valign=3D"top" align=3D"center">
+        <table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"600" class=3D"container" style=3D"text-align:left; width: 600px; max-wi=
+dth: 600px;" border=3D"0">
+          <tr>
+            <td height=3D"20" style=3D"height: 20px;" class=3D"h20">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" class=3D"logo">
+              <img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/80=
+8-GJW-314/images/google-cloud-certified.png" width=3D"306" height=3D"37" st=
+yle=3D"display: block; width: 306px; height: 37px; max-width: 306px; margin=
+: 0; padding: 0; line-height: 0" border=3D"0" />
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"20" style=3D"height: 20px;" class=3D"h20">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td valign=3D"top" bgcolor=3D"#fff" style=3D"background-color: =
+#fff" align=3D"center">
+              <table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" w=
+idth=3D"500" class=3D"inner-container" style=3D"text-align:left; width: 500=
+px; max-width: 500px;" border=3D"0">
+                <tr>
+                  <td height=3D"45" style=3D"height: 45px;" class=3D"mobH40=
+">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class=3D"mobF24" valign=3D"top" style=3D"font-family:=
+'Google Sans', Arial, 'sans-serif'; font-size: 32px; line-height: 36px; col=
+or: #3c4043">
+                    <p style=3D"margin: 0; padding: 0; font-size: 32px; lin=
+e-height: 36px;"><strong>Associate Cloud Engineer Exam</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td height=3D"40" style=3D"height: 40px; border-bottom: 1=
+px solid #e8eaed" class=3D"mobH40">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height=3D"38" style=3D"height: 38px; border: none;">&=
+nbsp;</td>
+                </tr>
+                <tr>
+                  <td valign=3D"top" style=3D"font-family:'Roboto', Arial, =
+'sans-serif'; font-size: 14px; line-height: 23px; color: #3c4043;">
+                    <p style=3D"margin-top: 0; padding-top: 0;">
+                      <strong>Dear Brent,</strong>
+                    </p>
+                    <p>Congratulations! You are officially a Google Cloud C=
+ertified - Associate Cloud Engineer.</p>
+                    <p>Your certification information:</p>
+
+                    <ul>
+                      <li>Certified User: Brent Wright</li>
+                      <li>Candidate ID: c74f3cbc-4fd7-45bd-9729-f195dc94d8c=
+e</li>
+                      <li>Certification ID: 1K568R</li>
+                      <li>Series ID: 50798</li>
+                      <li>Effective Date: 11-Feb 2022</li>
+                      <li>Expiration Date: 11-Feb 2024</li>
+                    </ul>
+
+                    <!-- button begin -->
+                    <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0"=
+ width=3D"100%">
+                      <tr>
+                        <td height=3D"15" style=3D"height: 15px;">&nbsp;</t=
+d>
+                      </tr>
+                      <tr>
+                        <td valign=3D"top">
+                          <table cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" width=3D"185" bgcolor=3D"#1d428a" style=3D"width: 185px; max-width: =
+185px; background: #1a73e8; -webkit-border-radius: 5px; -moz-border-radius:=
+ 5px; border-radius: 5px; overflow: hidden; margin-left:auto; margin-right:=
+auto; text-align:center;">
+                            <tr>
+                              <td width=3D"10">&nbsp;</td>
+                              <td valign=3D"middle" style=3D"font-family:He=
+lvetica, Arial, 'sans-serif'; font-size: 14px; color: #61717d; height: 40px=
+; text-align: center; " align=3D"center" height=3D"40">
+                                <p style=3D"margin: 0; padding: 0; font-siz=
+e: 14px;"><span style=3D"text-decoration: none; color: #fff;"><a href=3D"ht=
+tps://www.credential.net/ea97a16a-1f43-4060-aade-dba9e629bc30?key=3Db17259f=
+d59a72523ef611bfe3644ed80e2fb0d9b9fc254696d16d5f2ad77b1da" style=3D"text-de=
+coration: none; color: #fff;" target=3D"_blank">Claim your certificate</a><=
+/span></p>
+                              </td>
+                              <td width=3D"10">&nbsp;</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height=3D"25" style=3D"height: 25px;">&nbsp;</t=
+d>
+                      </tr>
+                    </table>
+                    <!-- button End -->
+
+                    <p style=3D"margin-top: 10px; padding-top: 0;">
+                     We have created <a href=3D"https://www.credential.net/=
+ea97a16a-1f43-4060-aade-dba9e629bc30?key=3Db17259fd59a72523ef611bfe3644ed80=
+e2fb0d9b9fc254696d16d5f2ad77b1da">a digital certificate</a> available in an=
+ online format so you can easily retrieve and share the details of your ach=
+ievement.
+                     You can print or download your certificate, add it to =
+your LinkedIn profile, or share to any of your preferred social networks. I=
+n addition, you can opt-into having your
+                     digital certificate shown in the <a href=3D"https://go=
+oglecloudcertified.credential.net/">Google Cloud Certified directory</a>. T=
+his is the only verified, publicly available
+                     list of Google Cloud Certified individuals maintained =
+by our team.
+                    </p>
+
+                   =20
+                    <p>
+                      If you have questions, please visit our <a href=3D"ht=
+tps://cloud.google.com/certification/faqs/#0">Help Center</a>.
+                      Don't see an answer to your question or have other co=
+mments, concerns?
+                      You can reach us  <a href=3D"https://support.google.c=
+om/a/contact/certification">here</a>.
+                    </p>
+                    <p>Thank you for participating in our certification pro=
+gram! We're happy to have you in our community.</p>
+                    <p style=3D"margin-bottom: 0; padding-bottom: 0;">
+                      See you in the cloud,
+                      <br />The Google Cloud Certification Team
+                    </p>
+
+                  </td>
+                </tr>
+
+                <tr>
+                  <td height=3D"50" style=3D"height: 50px; border-bottom: 1=
+px solid #e8eaed" class=3D"mobH55">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height=3D"38" style=3D"height: 38px; border: none;" c=
+lass=3D"mobH35">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class=3D"text-left" valign=3D"top" align=3D"center" s=
+tyle=3D"font-family:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-he=
+ight: 23px; color: #3c4043; text-align: center">
+                    <p style=3D"margin: 0; padding: 0; font-size: 14px; lin=
+e-height: 23px;"><strong style=3D"font-weight: 500">For more information ch=
+eck out the links below</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td height=3D"30" style=3D"height: 30px;" class=3D"mobH25=
+">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td valign=3D"top" align=3D"center">
+                    <table cellpadding=3D"0" cellspacing=3D"0" width=3D"500=
+" border=3D"0" align=3D"center" class=3D"container" style=3D"text-align:lef=
+t; width: 500px; max-width: 500px;">
+                      <tr>
+                        <td valign=3D"top" class=3D"mobTblB5">
+                          <table align=3D"left" cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"210" style=3D"width: 210px; max-width: 210px=
+;" class=3D"container">
+                            <tr>
+                              <td valign=3D"top" align=3D"left">
+                                <table align=3D"left" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" width=3D"100%" style=3D"width: 100%; max-width:=
+ 100%;">
+                                  <tr>
+                                    <td valign=3D"middle" align=3D"left" wi=
+dth=3D"26">
+                                      <img alt=3D"" src=3D"https://lp.cloud=
+platformonline.com/rs/808-GJW-314/images/search-icon.png" width=3D"15" heig=
+ht=3D"15" style=3D"display: block; line-height: 0; width: 15px; max-width: =
+15px;">
+                                    </td>
+                                    <td valign=3D"top" style=3D"font-family=
+:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-height: 23px; color: =
+#1a73e8">
+                                      <p style=3D"margin: 0; padding: 0; fo=
+nt-size: 14px; line-height: 23px;"><strong style=3D"font-weight: 500; color=
+: #1a73e8; text-decoration: none;"><a href=3D"https://googlecloudcertified.=
+credential.net/" style=3D"color: #1a73e8; text-decoration: none;" target=3D=
+"_blank">Certified Directory</a></strong></p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                             </td>
+                             <td valign=3D"top">
+                          <![endif]-->
+                          <table align=3D"left" cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"125" style=3D"width: 125px; max-width: 125px=
+;" class=3D"container">
+                            <tr>
+                              <td valign=3D"top" align=3D"left">
+                                <table align=3D"left" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" width=3D"100%" style=3D"width: 100%; max-width:=
+ 100%;">
+                                  <tr>
+                                    <td valign=3D"middle" align=3D"left" wi=
+dth=3D"26">
+                                      <img alt=3D"" src=3D"https://lp.cloud=
+platformonline.com/rs/808-GJW-314/images/message-icon.png" width=3D"16" hei=
+ght=3D"16" style=3D"display: block; line-height: 0; width: 15px; max-width:=
+ 15px;">
+                                    </td>
+                                    <td valign=3D"top" style=3D"font-family=
+:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-height: 23px; color: =
+#1a73e8">
+                                      <p style=3D"margin: 0; padding: 0; fo=
+nt-size: 14px; line-height: 23px;"><strong style=3D"font-weight: 500; color=
+: #1a73e8; text-decoration: none;"><a href=3D"https://cloud.google.com/cert=
+ification/faqs/#0" target=3D"_blank" style=3D"color: #1a73e8; text-decorati=
+on: none;">Help Center</a></strong></p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            <td valign=3D"top">
+                          <![endif]-->
+                          <table align=3D"left" cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"165" style=3D"width: 165px; max-width:165px;=
+" class=3D"container">
+                            <tr>
+                              <td valign=3D"top" align=3D"left">
+                                <table align=3D"left" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" width=3D"100%" style=3D"width: 100%; max-width:=
+ 100%;">
+                                  <tr>
+                                    <td valign=3D"middle" align=3D"left" wi=
+dth=3D"26">
+                                      <img alt=3D"" src=3D"https://lp.cloud=
+platformonline.com/rs/808-GJW-314/images/mail-icon.png" width=3D"15" height=
+=3D"15" style=3D"display: block; line-height: 0; width: 15px; max-width: 15=
+px;">
+                                    </td>
+                                    <td valign=3D"top" style=3D"font-family=
+:'Roboto', Arial, 'sans-serif'; font-size: 14px; line-height: 23px; color: =
+#1a73e8">
+                                      <p style=3D"margin: 0; padding: 0; fo=
+nt-size: 14px; line-height: 23px;"><strong style=3D"font-weight: 500; color=
+: #1a73e8; text-decoration: none;"><a href=3D"https://support.google.com/a/=
+contact/certification" style=3D"color: #1a73e8; text-decoration: none;" tar=
+get=3D"_blank">Contact Us</a></strong></p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td height=3D"60" style=3D"height: 60px;" class=3D"mobH25=
+">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td valign=3D"top" bgcolor=3D"#f0f0f1" style=3D"background-color: #f0=
+f0f1" align=3D"center">
+        <table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"500" class=3D"inner-container" style=3D"text-align:left; width: 500px; =
+max-width: 500px;" border=3D"0">
+          <tr>
+            <td height=3D"45" style=3D"height: 45px;" class=3D"mobH30">&nbs=
+p;</td>
+          </tr>
+          <tr>
+            <td align=3D"left">
+              <img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/80=
+8-GJW-314/images/google-cloud.png" width=3D"145" height=3D"26" style=3D"dis=
+play: block; width:145px; height:26px; max-width:145px; margin: 0; padding:=
+ 0; line-height: 0" />
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"18" style=3D"height: 18px;" class=3D"h18">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" style=3D"font-family:'Roboto'=
+, Arial, 'sans-serif'; font-size: 11px; line-height: 15px; color: #9aa0a6; =
+text-align: left; padding-bottom: 15px;">
+              <p style=3D"margin: 0; padding: 0; font-size: 11px; line-heig=
+ht: 15px;">Google LLC 1600 Amphitheatre Parkway, Mountain View, CA 94043</p=
+>
+            </td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" style=3D"font-family:'Roboto'=
+, Arial, 'sans-serif'; font-size: 11px; line-height: 15px; color: #9aa0a6; =
+text-align: left; padding-bottom: 15px;">
+              <p style=3D"margin: 0; padding: 0; font-size: 11px; line-heig=
+ht: 15px;">Your personal information is handled in accordance with <span st=
+yle=3D"color: #1A73E8; text-decoration: underline;"><a href=3D"https://poli=
+cies.google.com/privacy" target=3D"_blank" style=3D"color: #1a73e8; text-de=
+coration: underline;">Google's Privacy Policy</a></span>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td align=3D"left" valign=3D"top" style=3D"font-family:'Roboto'=
+, Arial, 'sans-serif'; font-size: 11px; line-height: 15px; color: #9aa0a6; =
+text-align: left; padding-bottom: 15px;">
+              <p style=3D"margin: 0; padding: 0; font-size: 11px; line-heig=
+ht: 15px;">Google reserves the right to revoke your Google Cloud Certificat=
+ion if you violate the <span style=3D"color: #1A73E8; text-decoration: unde=
+rline;"><a href=3D"https://cloud.google.com/certification/terms" target=3D"=
+_blank" style=3D"color: #1a73e8; text-decoration: underline;">Exam Terms an=
+d Conditions</a></span>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"30" style=3D"height: 30px;" class=3D"h30">&nbsp;<=
+/td>
+          </tr>
+          <tr>
+            <td valign=3D"top" align=3D"left">
+              <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=
+=3D"95" align=3D"left" style=3D"width: 95px; max-width: 95px;">
+                <tr>
+                  <td align=3D"center">
+                    <a href=3D"https://twitter.com/Gcpcloud" target=3D"_bla=
+nk"><img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/808-GJW-314/=
+images/twiter.png" width=3D"20" height=3D"20" style=3D"display: block; widt=
+h:20px; height:20px; max-width:20px; margin: 0 auto; padding: 0; line-heigh=
+t: 0" /></a>
+                  </td>
+                  <td width=3D"46">&nbsp;</td>
+                  <td align=3D"center">
+                    <a href=3D"https://www.facebook.com/googlecloud/" targe=
+t=3D"_blank"><img alt=3D"" src=3D"https://lp.cloudplatformonline.com/rs/808=
+-GJW-314/images/fb.png" width=3D"20" height=3D"20" style=3D"display: block;=
+ width:20px; height:20px; max-width:20px; margin: 0 auto; padding: 0; line-=
+height: 0" /></a>
+                  </td>
+                  <td width=3D"46">&nbsp;</td>
+                  <td align=3D"center">
+                    <a href=3D"https://www.linkedin.com/company/google-clou=
+d-platform-certified/about/" target=3D"_blank"><img alt=3D"" src=3D"https:/=
+/lp.cloudplatformonline.com/rs/808-GJW-314/images/linkedin.png" width=3D"20=
+" height=3D"20" style=3D"display: block; width:20px; height:20px; max-width=
+:20px; margin: 0 auto; padding: 0; line-height: 0" /></a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td height=3D"60" style=3D"height: 60px;" class=3D"mobH40">&nbs=
+p;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- end of 100% -->
+</body>
+</html>
+--0000000000003a985105d7c9d3a3--
