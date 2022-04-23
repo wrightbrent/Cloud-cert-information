@@ -1,0 +1,51 @@
+AZ-104 notes
+
+created an app service nginx app
+    3  az appservice plan create --name Brentapp --resource-group resourcegroup_45645_23815469 --is-linux
+    4  az webapp create --resource-group resourcegroup_45645_23815469 --plan Brentapp --name Brentlyapp --deployment-container-image-name nginx
+"defdefaultHostName": "brentlyapp.azurewebsites.net"
+"hostNames": [
+    "brentlyapp.azurewebsites.net"
+
+Jeff's Master Class:  https://www.youtube.com/watch?v=VOod_VNgdJk&list=PLlVtbbG169nGlGPWs9xaLKT1KfwqREHbs
+
+AZ CLI Essentials guide: https://lucid.app/lucidchart/93d52a7f-335b-489e-a663-dd7fefe13f11/view?page=nN66HzDoMSOr#
+
+Azure sample questions from Microsoft: https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWSOFn
+
+command to create a vm:
+cloud@Azure:~$ az vm create \
+> --resource-group 87-283b85b9-use-azure-cli-to-create-a-virtual-mach \
+> --name test2vm \
+> --image UbuntuLTS \
+> --admin-username wright01 \
+> --generate-ssh-keys \
+> --size Standard_B2ms \
+> --public-ip-address test1vm-pip \
+> --nsg lab-test1-nsg \
+> --vnet-name testlvnet \
+> --subnet subnet1
+
+output achieved:
+
+{
+  "fqdns": "",
+  "id": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/87-283b85b9-use-azure-cli-to-create-a-virtual-mach/providers/Microsoft.Compute/virtualMachines/test2vm",
+  "location": "eastus",
+  "macAddress": "00-22-48-30-3B-E2",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.1.4",
+  "publicIpAddress": "20.231.72.75",
+  "resourceGroup": "87-283b85b9-use-azure-cli-to-create-a-virtual-mach",
+  "zones": ""
+}
+
+pubName="pubip1"
+pubSku="basic"
+pubAlloc="dynamic"
+nic2Name="nic2"
+nic2Address="10.1.0.10"
+vnetName="vnet1"
+subnetName="subnet1"
+
+AZCLI book: https://lucid.app/lucidchart/93d52a7f-335b-489e-a663-dd7fefe13f11/view?page=8L66hCFYoXKS#
